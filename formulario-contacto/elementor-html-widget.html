@@ -1,0 +1,533 @@
+<!-- ============================================================
+     WIDGET HTML DE ELEMENTOR — Formulario Contacto Grupo Andrade
+     Pegar TODO este código en: Elementor > Widget HTML > HTML
+     ============================================================ -->
+
+<style>
+/* ── Reset scoped ── */
+#ga-form-wrap { box-sizing: border-box; }
+#ga-form-wrap * { box-sizing: border-box; }
+
+#ga-form-wrap {
+    background: #fff;
+    padding: 40px 50px 50px;
+    max-width: 1100px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: #333;
+}
+
+/* ── Grid dos columnas ── */
+#ga-form-wrap .ga-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 30px;
+}
+#ga-form-wrap .ga-row.single {
+    grid-template-columns: 1fr;
+}
+
+/* ── Campo individual ── */
+#ga-form-wrap .ga-field {
+    margin-bottom: 45px !important;
+    padding: 0 !important;
+    position: relative;
+}
+
+#ga-form-wrap .ga-field input,
+#ga-form-wrap .ga-field textarea {
+    display: block !important;
+    width: 100% !important;
+    border: none !important;
+    border-bottom: 1px solid #ccc !important;
+    border-radius: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    font-size: 14px !important;
+    color: #333 !important;
+    padding: 6px 0 8px !important;
+    margin: 0 !important;
+    background: transparent !important;
+    font-family: 'Helvetica Neue', Arial, sans-serif !important;
+    resize: vertical;
+    line-height: 1.4 !important;
+    transition: border-color .2s;
+}
+#ga-form-wrap .ga-field textarea {
+    min-height: 90px !important;
+}
+
+/* Placeholder gris — todos los prefijos */
+#ga-form-wrap .ga-field input::placeholder,
+#ga-form-wrap .ga-field textarea::placeholder             { color: #aaa !important; opacity: 1 !important; }
+#ga-form-wrap .ga-field input::-webkit-input-placeholder,
+#ga-form-wrap .ga-field textarea::-webkit-input-placeholder { color: #aaa !important; opacity: 1 !important; }
+#ga-form-wrap .ga-field input::-moz-placeholder,
+#ga-form-wrap .ga-field textarea::-moz-placeholder         { color: #aaa !important; opacity: 1 !important; }
+#ga-form-wrap .ga-field input:-ms-input-placeholder,
+#ga-form-wrap .ga-field textarea:-ms-input-placeholder     { color: #aaa !important; opacity: 1 !important; }
+
+#ga-form-wrap .ga-field input:focus,
+#ga-form-wrap .ga-field textarea:focus {
+    border-bottom-color: #555 !important;
+}
+
+/* Error de campo */
+#ga-form-wrap .ga-field.ga-error input,
+#ga-form-wrap .ga-field.ga-error textarea {
+    border-bottom-color: #c0392b !important;
+}
+#ga-form-wrap .ga-field .ga-err-msg {
+    display: none;
+    font-size: 11px !important;
+    color: #c0392b !important;
+    margin-top: 4px !important;
+    padding: 0 !important;
+}
+#ga-form-wrap .ga-field.ga-error .ga-err-msg {
+    display: block;
+}
+
+/* ── Textos RGPD ── */
+#ga-form-wrap .ga-consent-text {
+    font-size: 13px !important;
+    color: #555 !important;
+    line-height: 1.6 !important;
+    margin-bottom: 18px !important;
+    padding: 0 !important;
+}
+#ga-form-wrap .ga-privacy-text {
+    font-size: 13px !important;
+    color: #555 !important;
+    line-height: 1.6 !important;
+    margin-top: 6px !important;
+    margin-bottom: 28px !important;
+    padding: 0 !important;
+}
+#ga-form-wrap .ga-privacy-text a {
+    color: #333 !important;
+    font-weight: bold !important;
+    text-decoration: underline !important;
+}
+
+/* ── Checkboxes ── */
+#ga-form-wrap .ga-check-wrap {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 10px;
+    margin-bottom: 12px !important;
+    padding: 0 !important;
+}
+#ga-form-wrap .ga-check-wrap input[type="checkbox"] {
+    width: 15px !important;
+    height: 15px !important;
+    min-width: 15px !important;
+    margin: 2px 0 0 0 !important;
+    padding: 0 !important;
+    cursor: pointer;
+    border: 1px solid #999 !important;
+    appearance: none;
+    -webkit-appearance: none;
+    background: #fff !important;
+    position: relative;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+    flex-shrink: 0;
+}
+#ga-form-wrap .ga-check-wrap input[type="checkbox"]:checked {
+    background: #333 !important;
+    border-color: #333 !important;
+}
+#ga-form-wrap .ga-check-wrap input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 5px;
+    height: 9px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+}
+#ga-form-wrap .ga-check-wrap label {
+    font-size: 13px !important;
+    color: #333 !important;
+    cursor: pointer;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+#ga-form-wrap .ga-check-wrap.ga-error label { color: #c0392b !important; }
+
+/* ── Botón ── */
+#ga-form-wrap .ga-btn-wrap { position: relative; }
+
+#ga-form-wrap #ga-submit-btn {
+    display: block !important;
+    width: 100% !important;
+    background: #111 !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 20px !important;
+    margin: 0 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    cursor: pointer !important;
+    font-family: inherit !important;
+    box-shadow: none !important;
+    transition: background .2s;
+}
+#ga-form-wrap #ga-submit-btn:hover:not(:disabled) { background: #333 !important; }
+#ga-form-wrap #ga-submit-btn:disabled {
+    background: #aaa !important;
+    cursor: not-allowed !important;
+    letter-spacing: 2px !important;
+}
+
+/* Tooltip */
+#ga-tooltip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #c0392b;
+    color: #fff;
+    font-size: 12px;
+    padding: 10px 16px;
+    border-radius: 4px;
+    z-index: 9999;
+    pointer-events: none;
+    line-height: 1.7;
+    text-align: left;
+    min-width: 240px;
+    white-space: nowrap;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+#ga-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #c0392b;
+}
+
+/* ── Modal ── */
+#ga-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.55);
+    z-index: 99999;
+    align-items: center;
+    justify-content: center;
+}
+#ga-modal-overlay.visible {
+    display: flex;
+}
+#ga-modal-box {
+    background: #fff;
+    border-radius: 4px;
+    padding: 48px 40px 36px;
+    max-width: 440px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 8px 40px rgba(0,0,0,.18);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+#ga-modal-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 30px;
+    line-height: 1;
+}
+#ga-modal-icon.ok  { background: #eafaf1; color: #1e8449; }
+#ga-modal-icon.err { background: #fdedec; color: #c0392b; }
+#ga-modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #111;
+}
+#ga-modal-msg {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+#ga-modal-close {
+    display: inline-block;
+    background: #111;
+    color: #fff;
+    border: none;
+    padding: 12px 32px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    border-radius: 0;
+    transition: background .2s;
+}
+#ga-modal-close:hover { background: #333; }
+
+@media (max-width: 620px) {
+    #ga-form-wrap { padding: 24px 20px 36px !important; }
+    #ga-form-wrap .ga-row { grid-template-columns: 1fr !important; }
+}
+</style>
+
+<div id="ga-form-wrap">
+    <form id="ga-contact-form" novalidate>
+
+        <!-- Fila 1 -->
+        <div class="ga-row">
+            <div class="ga-field">
+                <input type="text" id="ga-nombre" name="nombre"
+                       placeholder="Nombre" autocomplete="given-name">
+                <span class="ga-err-msg">Campo requerido</span>
+            </div>
+            <div class="ga-field">
+                <input type="text" id="ga-apellidos" name="apellidos"
+                       placeholder="Apellidos" autocomplete="family-name">
+                <span class="ga-err-msg">Campo requerido</span>
+            </div>
+        </div>
+
+        <!-- Fila 2 -->
+        <div class="ga-row">
+            <div class="ga-field">
+                <input type="email" id="ga-email" name="email"
+                       placeholder="Email" autocomplete="email">
+                <span class="ga-err-msg">Introduce un email válido</span>
+            </div>
+            <div class="ga-field">
+                <input type="tel" id="ga-telefono" name="telefono"
+                       placeholder="Teléfono" maxlength="9" autocomplete="tel">
+                <span class="ga-err-msg">Introduce exactamente 9 dígitos</span>
+            </div>
+        </div>
+
+        <!-- Fila 3 -->
+        <div class="ga-row single">
+            <div class="ga-field">
+                <textarea id="ga-mensaje" name="mensaje"
+                          placeholder="Mensaje" rows="4"></textarea>
+                <span class="ga-err-msg">Campo requerido</span>
+            </div>
+        </div>
+
+        <!-- Texto RGPD -->
+        <p class="ga-consent-text">
+            Para poder proporcionarte el contenido solicitado, debemos almacenar y procesar tus datos personales.
+            Si aceptas que almacenemos tus datos personales para este fin, marca la casilla de abajo.
+        </p>
+
+        <!-- Checkbox obligatorio -->
+        <div class="ga-check-wrap" id="ga-wrap-datos">
+            <input type="checkbox" id="ga-acepto-datos" name="acepto_datos">
+            <label for="ga-acepto-datos">Acepto permitir al Grupo Andrade, almacenar y procesar mis datos personales.*</label>
+        </div>
+
+        <!-- Checkbox opcional -->
+        <div class="ga-check-wrap">
+            <input type="checkbox" id="ga-acepto-com" name="acepto_com">
+            <label for="ga-acepto-com">Acepto recibir otras comunicaciones del Grupo Andrade</label>
+        </div>
+
+        <!-- Texto privacidad -->
+        <p class="ga-privacy-text">
+            Puedes darte de baja de estas comunicaciones en cualquier momento.
+            Consulta nuestra <a href="/politica-de-privacidad/" target="_blank">Política de Privacidad</a>.
+        </p>
+
+        <!-- Botón -->
+        <div class="ga-btn-wrap">
+            <div id="ga-tooltip"></div>
+            <button type="submit" id="ga-submit-btn" disabled>Enviar formulario</button>
+        </div>
+
+    </form>
+</div>
+
+<!-- Modal de respuesta -->
+<div id="ga-modal-overlay" role="dialog" aria-modal="true">
+    <div id="ga-modal-box">
+        <div id="ga-modal-icon"></div>
+        <div id="ga-modal-title"></div>
+        <div id="ga-modal-msg"></div>
+        <button id="ga-modal-close">Cerrar</button>
+    </div>
+</div>
+
+<script>
+(function () {
+    var form    = document.getElementById('ga-contact-form');
+    var btn     = document.getElementById('ga-submit-btn');
+    var tooltip = document.getElementById('ga-tooltip');
+    var overlay = document.getElementById('ga-modal-overlay');
+    var mIcon   = document.getElementById('ga-modal-icon');
+    var mTitle  = document.getElementById('ga-modal-title');
+    var mMsg    = document.getElementById('ga-modal-msg');
+    var mClose  = document.getElementById('ga-modal-close');
+
+    function showModal(ok, title, msg) {
+        mIcon.className  = ok ? 'ok' : 'err';
+        mIcon.textContent = ok ? '✓' : '✕';
+        mTitle.textContent = title;
+        mMsg.textContent   = msg;
+        overlay.classList.add('visible');
+        mClose.focus();
+    }
+    function closeModal() { overlay.classList.remove('visible'); }
+    mClose.addEventListener('click', closeModal);
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+
+    function getErrors() {
+        var errs = [];
+        var n = document.getElementById('ga-nombre');
+        if (!n.value.trim()) errs.push({ el: n, lbl: 'Nombre' });
+
+        var a = document.getElementById('ga-apellidos');
+        if (!a.value.trim()) errs.push({ el: a, lbl: 'Apellidos' });
+
+        var e = document.getElementById('ga-email');
+        if (!e.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.value.trim()))
+            errs.push({ el: e, lbl: 'Email válido' });
+
+        var t = document.getElementById('ga-telefono');
+        if (!/^\d{9}$/.test(t.value.trim()))
+            errs.push({ el: t, lbl: 'Teléfono (9 dígitos)' });
+
+        var m = document.getElementById('ga-mensaje');
+        if (!m.value.trim()) errs.push({ el: m, lbl: 'Mensaje' });
+
+        var c = document.getElementById('ga-acepto-datos');
+        if (!c.checked) errs.push({ el: c, lbl: 'Aceptar política de datos' });
+
+        return errs;
+    }
+
+    function markErrors(errs) {
+        form.querySelectorAll('.ga-field').forEach(function (f) { f.classList.remove('ga-error'); });
+        document.getElementById('ga-wrap-datos').classList.remove('ga-error');
+        errs.forEach(function (e) {
+            if (e.el.type === 'checkbox') {
+                document.getElementById('ga-wrap-datos').classList.add('ga-error');
+            } else {
+                e.el.closest('.ga-field').classList.add('ga-error');
+            }
+        });
+    }
+
+    /* ── Activar / desactivar botón en tiempo real ── */
+    function isFormReady() {
+        var n = document.getElementById('ga-nombre').value.trim();
+        var a = document.getElementById('ga-apellidos').value.trim();
+        var e = document.getElementById('ga-email').value.trim();
+        var t = document.getElementById('ga-telefono').value.trim();
+        var m = document.getElementById('ga-mensaje').value.trim();
+        var c = document.getElementById('ga-acepto-datos').checked;
+        return n && a && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e) && /^\d{9}$/.test(t) && m && c;
+    }
+    function updateBtn() {
+        btn.disabled = !isFormReady();
+    }
+    form.addEventListener('input', updateBtn);
+    document.getElementById('ga-acepto-datos').addEventListener('change', updateBtn);
+
+    btn.addEventListener('mouseenter', function () {
+        var errs = getErrors();
+        if (!errs.length) { tooltip.style.display = 'none'; return; }
+        tooltip.innerHTML = '<strong>Faltan campos:</strong><br>' +
+            errs.map(function (e) { return '&bull; ' + e.lbl; }).join('<br>');
+        tooltip.style.display = 'block';
+    });
+    btn.addEventListener('mouseleave', function () { tooltip.style.display = 'none'; });
+
+    form.addEventListener('input', function (e) {
+        var f = e.target.closest('.ga-field');
+        if (f) f.classList.remove('ga-error');
+        updateBtn();
+    });
+    document.getElementById('ga-acepto-datos').addEventListener('change', function () {
+        document.getElementById('ga-wrap-datos').classList.remove('ga-error');
+        updateBtn();
+    });
+
+    document.getElementById('ga-telefono').addEventListener('keypress', function (e) {
+        if (!/\d/.test(e.key)) e.preventDefault();
+    });
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        tooltip.style.display = 'none';
+
+        var errs = getErrors();
+        if (errs.length) {
+            markErrors(errs);
+            var first = errs[0].el.closest('.ga-field') || errs[0].el;
+            first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = 'Enviando…';
+
+        var data = new FormData();
+        data.append('action',    'ga_contact_submit');
+        data.append('nonce',     (window.ga_ajax && window.ga_ajax.nonce) || '');
+        data.append('nombre',    document.getElementById('ga-nombre').value.trim());
+        data.append('apellidos', document.getElementById('ga-apellidos').value.trim());
+        data.append('email',     document.getElementById('ga-email').value.trim());
+        data.append('telefono',  document.getElementById('ga-telefono').value.trim());
+        data.append('mensaje',   document.getElementById('ga-mensaje').value.trim());
+        if (document.getElementById('ga-acepto-datos').checked) data.append('acepto_datos', '1');
+        if (document.getElementById('ga-acepto-com').checked)   data.append('acepto_com',   '1');
+
+        var url = (window.ga_ajax && window.ga_ajax.url) || '/wp-admin/admin-ajax.php';
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', url);
+        xhr.onload = function () {
+            btn.textContent = 'Enviar formulario';
+            try {
+                var res = JSON.parse(xhr.responseText);
+                if (res.success) {
+                    showModal(true,
+                        '¡Mensaje enviado!',
+                        res.data.msg || 'Nos pondremos en contacto contigo lo antes posible.');
+                    form.reset();
+                    btn.disabled = true;
+                } else {
+                    showModal(false,
+                        'Error al enviar',
+                        (res.data && res.data.msg) || 'Por favor, inténtelo de nuevo.');
+                    btn.disabled = !isFormReady();
+                }
+            } catch (ex) {
+                showModal(false, 'Error de conexión', 'Por favor, inténtelo de nuevo.');
+                btn.disabled = !isFormReady();
+            }
+        };
+        xhr.onerror = function () {
+            btn.textContent = 'Enviar formulario';
+            showModal(false, 'Error de conexión', 'Comprueba tu conexión e inténtalo de nuevo.');
+            btn.disabled = !isFormReady();
+        };
+        xhr.send(data);
+    });
+}());
+</script>

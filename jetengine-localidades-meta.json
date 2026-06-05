@@ -1,0 +1,59 @@
+[
+  {
+    "title": "Provincia",
+    "name": "provincia",
+    "object_type": "field",
+    "type": "text",
+    "width": "100%",
+    "description": "Provincia de la localidad (Ej: Sevilla, Madrid). Se usará para la URL."
+  },
+  {
+    "title": "Código Postal",
+    "name": "codigo_postal",
+    "object_type": "field",
+    "type": "text",
+    "width": "50%",
+    "description": "Código postal principal de la zona (Vital para el Schema de Google)."
+  },
+  {
+    "title": "Coordenadas Mapa",
+    "name": "coordenadas_mapa",
+    "object_type": "field",
+    "type": "text",
+    "width": "50%",
+    "description": "Latitud y Longitud separados por coma (Ej: 37.2828,-5.9209)."
+  },
+  {
+    "title": "Teléfono Comercial",
+    "name": "telefono_comercial",
+    "object_type": "field",
+    "type": "text",
+    "width": "50%",
+    "description": "Opcional. Si hay un teléfono distinto para esta zona."
+  },
+  {
+    "title": "Dirección Física",
+    "name": "direccion_fisica",
+    "object_type": "field",
+    "type": "text",
+    "width": "50%",
+    "description": "Opcional. Rellenar SOLO si hay un punto físico/tienda en esta ciudad."
+  },
+  {
+    "title": "Descripción del clima/zona",
+    "name": "descripcion_clima_zona",
+    "object_type": "field",
+    "type": "wysiwyg",
+    "width": "100%",
+    "description": "Texto ÚNICO para esta ciudad. Ej: 'En Sevilla hace mucho calor, recomendamos X cristal...'. VITAL para evitar penalizaciones SEO."
+  },
+  {
+    "title": "Foto Instalación Destacada",
+    "name": "foto_instalacion_zona",
+    "object_type": "field",
+    "type": "media",
+    "value_format": "url",
+    "width": "100%",
+    "description": "Sube una foto real de una obra hecha en esta ciudad."
+  }
+]

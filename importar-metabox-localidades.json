@@ -1,0 +1,62 @@
+{
+  "title": "Datos de Localidad (SEO)",
+  "meta_box": {
+    "name": "Datos de Localidad (SEO)",
+    "show_for": "post",
+    "allowed_posts": {
+      "localidades": "localidades"
+    }
+  },
+  "meta_fields": [
+    {
+      "title": "Provincia",
+      "name": "provincia",
+      "object_type": "field",
+      "type": "text",
+      "width": "100%"
+    },
+    {
+      "title": "Código Postal",
+      "name": "codigo_postal",
+      "object_type": "field",
+      "type": "text",
+      "width": "50%"
+    },
+    {
+      "title": "Coordenadas Mapa",
+      "name": "coordenadas_mapa",
+      "object_type": "field",
+      "type": "text",
+      "width": "50%"
+    },
+    {
+      "title": "Teléfono Comercial",
+      "name": "telefono_comercial",
+      "object_type": "field",
+      "type": "text",
+      "width": "50%"
+    },
+    {
+      "title": "Dirección Física",
+      "name": "direccion_fisica",
+      "object_type": "field",
+      "type": "text",
+      "width": "50%"
+    },
+    {
+      "title": "Descripción del clima/zona",
+      "name": "descripcion_clima_zona",
+      "object_type": "field",
+      "type": "wysiwyg",
+      "width": "100%"
+    },
+    {
+      "title": "Foto Instalación Destacada",
+      "name": "foto_instalacion_zona",
+      "object_type": "field",
+      "type": "media",
+      "value_format": "url",
+      "width": "100%"
+    }
+  ]
+}

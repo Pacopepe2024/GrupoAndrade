@@ -1,0 +1,72 @@
+{
+  "meta_boxes": {
+    "schuco-nextjs": {
+      "args": {
+        "object_type": "post",
+        "allowed_tax": [],
+        "allowed_post_type": ["schuco-pvc"],
+        "allowed_posts": [],
+        "excluded_posts": [],
+        "active_conditions": [],
+        "name": "Campos Web NextJS"
+      },
+      "meta_fields": [
+        { "title": "Pestaña: General", "name": "tab_general", "object_type": "tab", "type": "text" },
+        { "title": "Nombre fabricante", "name": "nombre-fabricante", "object_type": "field", "type": "text", "width": "50%" },
+        { "title": "Catálogo PDF (URL)", "name": "link-descarga", "object_type": "field", "type": "text", "width": "50%" },
+        { "title": "Descripción Larga", "name": "descripcion-larga-producto", "object_type": "field", "type": "wysiwyg", "width": "100%" },
+        { "title": "Galería Principal (Foto cad)", "name": "foto-cad", "object_type": "field", "type": "gallery", "value_format": "url", "width": "100%" },
+        
+        { "title": "Pestaña: Medidas", "name": "tab_medidas", "object_type": "tab", "type": "text" },
+        { "title": "Profundidad marco", "name": "valor_profundidad_marco", "object_type": "field", "type": "text", "width": "33%" },
+        { "title": "Profundidad hoja", "name": "valor_profundidad_hoja", "object_type": "field", "type": "text", "width": "33%" },
+        { "title": "Tipos de hojas", "name": "valor_tipos_de_hojas", "object_type": "field", "type": "text", "width": "33%" },
+        { "title": "Espesor vidrio", "name": "acristalamiento", "object_type": "field", "type": "text", "width": "33%" },
+        { "title": "Máx. Blanco", "name": "max-blanco", "object_type": "field", "type": "text", "width": "33%" },
+        { "title": "Máx. Color", "name": "max-color", "object_type": "field", "type": "text", "width": "33%" },
+        
+        { "title": "Pestaña: Prestaciones", "name": "tab_prestaciones", "object_type": "tab", "type": "text" },
+        { "title": "Aislamiento térmico", "name": "valor_aislamiento-termico", "object_type": "field", "type": "text", "width": "33%" },
+        { "title": "Aislamiento acústico", "name": "valor_aislamiento-acustico", "object_type": "field", "type": "text", "width": "33%" },
+        { "title": "Cámaras aislamiento", "name": "valor_camara_living", "object_type": "field", "type": "text", "width": "33%" },
+        { "title": "Niveles de juntas", "name": "valor_niveles_juntas", "object_type": "field", "type": "text", "width": "33%" },
+        { "title": "Tipos de refuerzos", "name": "valor_refuerzo", "object_type": "field", "type": "text", "width": "33%" },
+        { "title": "Resistencia al viento", "name": "valor_resistencia_viento", "object_type": "field", "type": "text", "width": "33%" },
+        { "title": "Permeabilidad al aire", "name": "valor_permeabilidad_aire", "object_type": "field", "type": "text", "width": "33%" },
+        { "title": "Estanqueidad al agua", "name": "valor_estanqueidad_agua", "object_type": "field", "type": "text", "width": "33%" },
+        { "title": "Seguridad", "name": "valor_seguridad", "object_type": "field", "type": "text", "width": "33%" },
+        { "title": "Peso máximo hoja", "name": "peso-maximo", "object_type": "field", "type": "text", "width": "33%" },
+        { "title": "Umbral inferior", "name": "valor_umbral", "object_type": "field", "type": "text", "width": "33%" },
+        { "title": "Acabados disponibles (Texto)", "name": "valor_acabado_superficies", "object_type": "field", "type": "text", "width": "33%" },
+
+        { "title": "Pestaña: Galerías Acabados", "name": "tab_galerias", "object_type": "tab", "type": "text" },
+        { "title": "Lisos", "name": "lisos", "object_type": "field", "type": "gallery", "value_format": "url", "width": "33%" },
+        { "title": "Texturados", "name": "texturados", "object_type": "field", "type": "gallery", "value_format": "url", "width": "33%" },
+        { "title": "TopAlum", "name": "topalum", "object_type": "field", "type": "gallery", "value_format": "url", "width": "33%" },
+
+        { "title": "Pestaña: Multimedia e Inspiración", "name": "tab_multimedia", "object_type": "tab", "type": "text" },
+        { "title": "Enlace Video YouTube", "name": "enlace-video", "object_type": "field", "type": "text", "width": "50%" },
+        { "title": "Video subido (MP4)", "name": "video", "object_type": "field", "type": "media", "value_format": "url", "width": "50%" },
+        { "title": "Inspirate 1", "name": "inspirate1", "object_type": "field", "type": "media", "value_format": "url", "width": "25%" },
+        { "title": "Inspirate 2", "name": "inspirate2", "object_type": "field", "type": "media", "value_format": "url", "width": "25%" },
+        { "title": "Inspirate 3", "name": "inspirate3", "object_type": "field", "type": "media", "value_format": "url", "width": "25%" },
+        { "title": "Inspirate 4", "name": "inspirate4", "object_type": "field", "type": "media", "value_format": "url", "width": "25%" },
+
+        { "title": "Pestaña: Bloques Destacados", "name": "tab_destacados", "object_type": "tab", "type": "text" },
+        { "title": "Título Bloque 1", "name": "nombre_slider1", "object_type": "field", "type": "text", "width": "33%" },
+        { "title": "Texto Bloque 1", "name": "contenido_slider_uno", "object_type": "field", "type": "textarea", "width": "33%" },
+        { "title": "Imagen Bloque 1", "name": "imagen_slider_uno", "object_type": "field", "type": "media", "value_format": "url", "width": "33%" },
+        { "title": "Título Bloque 2", "name": "nombre_slider2", "object_type": "field", "type": "text", "width": "33%" },
+        { "title": "Texto Bloque 2", "name": "contenido_slider_dos", "object_type": "field", "type": "textarea", "width": "33%" },
+        { "title": "Imagen Bloque 2", "name": "imagen_slider_dos", "object_type": "field", "type": "media", "value_format": "url", "width": "33%" },
+        { "title": "Título Bloque 3", "name": "nombre_slider2_tres", "object_type": "field", "type": "text", "width": "33%" },
+        { "title": "Texto Bloque 3", "name": "contenido_slider_tres", "object_type": "field", "type": "textarea", "width": "33%" },
+        { "title": "Imagen Bloque 3", "name": "imagen_slider_tres", "object_type": "field", "type": "media", "value_format": "url", "width": "33%" },
+        { "title": "Título Bloque 4", "name": "nombre_slider2_cuatro", "object_type": "field", "type": "text", "width": "33%" },
+        { "title": "Texto Bloque 4", "name": "contenido_slider_cuatro", "object_type": "field", "type": "textarea", "width": "33%" },
+        { "title": "Imagen Bloque 4", "name": "imagen_slider_cuatro", "object_type": "field", "type": "media", "value_format": "url", "width": "33%" }
+      ],
+      "id": "meta-schuco-nextjs"
+    }
+  }
+}
