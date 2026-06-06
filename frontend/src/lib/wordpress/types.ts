@@ -40,6 +40,25 @@ export interface WPProduct {
     valor_resistencia_viento?: string;
     'peso-maximo'?: string;
     
+    // Cotas interactivas (Technical Drawing)
+    valor_total_seccion?: string;
+    cota_marco_x?: string;
+    cota_marco_y?: string;
+    cota_marco_rotacion?: string;
+    cota_marco_ancho?: string;
+    cota_hoja_x?: string;
+    cota_hoja_y?: string;
+    cota_hoja_rotacion?: string;
+    cota_hoja_ancho?: string;
+    cota_vidrio_x?: string;
+    cota_vidrio_y?: string;
+    cota_vidrio_rotacion?: string;
+    cota_vidrio_ancho?: string;
+    cota_total_seccion_x?: string;
+    cota_total_seccion_y?: string;
+    cota_total_seccion_rotacion?: string;
+    cota_total_seccion_ancho?: string;
+    
     // Documentacion
     'link-descarga'?: string;
 
