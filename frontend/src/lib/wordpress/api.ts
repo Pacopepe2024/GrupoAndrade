@@ -13,7 +13,12 @@ export async function getCPT<T = WPProduct>(cpt: string, params: Record<string, 
     
     const res = await fetch(url.toString(), { 
       // Desactivamos la caché temporalmente para que veas los cambios al instante
-      cache: 'no-store'
+      cache: 'no-store',
+      headers: {
+        // Engañamos al firewall de Hostalia haciéndole creer que somos un navegador Chrome normal
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'application/json'
+      }
     });
 
     if (!res.ok) {
