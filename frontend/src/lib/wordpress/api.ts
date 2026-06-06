@@ -17,14 +17,15 @@ export async function getCPT<T = WPProduct>(cpt: string, params: Record<string, 
     });
 
     if (!res.ok) {
+      const errorText = await res.text();
       console.warn(`[WP API] Fallo al obtener ${cpt} (${res.status}). Devolviendo mock para desarrollo.`);
-      return getMockData(cpt) as unknown as T[];
+      return getMockData(cpt, `Error HTTP ${res.status}: ${res.statusText} - ${errorText.substring(0, 100)}`) as unknown as T[];
     }
 
     return res.json();
-  } catch (error) {
+  } catch (error: any) {
     console.warn(`[WP API] Error de conexión con ${WP_BASE}. Devolviendo mock para desarrollo.`);
-    return getMockData(cpt) as unknown as T[];
+    return getMockData(cpt, `Fetch Error: ${error.message}`) as unknown as T[];
   }
 }
 
@@ -34,16 +35,16 @@ export async function getCPTBySlug<T = WPProduct>(cpt: string, slug: string): Pr
 }
 
 // Datos de prueba (Mock) mientras configuramos el REST API de JetEngine
-function getMockData(_cpt: string): WPProduct[] {
+function getMockData(_cpt: string, errorMessage?: string): WPProduct[] {
   return [
     {
       id: 1,
       date: new Date().toISOString(),
-      slug: 'schuco-focusing', // Slug original que tenías en Next
-      title: { rendered: 'Schüco Focus Ing (MODO PRUEBA)' },
+      slug: 'symbiotic', // Usamos symbiotic temporalmente para que se vea
+      title: { rendered: 'Error de Conexión Vercel-WP' },
       content: { rendered: '' },
       meta: {
-        'descripcion-larga-producto': 'Los datos reales de JetEngine aún no están saliendo por la API REST de tu WordPress. Debemos activar la opción "Register in REST API" en JetEngine o usar el script expose-meta.php.',
+        'descripcion-larga-producto': errorMessage || 'Los datos reales de JetEngine aún no están saliendo por la API REST de tu WordPress. Debemos activar la opción "Register in REST API" en JetEngine o usar el script expose-meta.php.',
         valor_profundidad_marco: '70 mm',
         valor_profundidad_hoja: '76 mm',
         acristalamiento: '16 mm - 54 mm',
