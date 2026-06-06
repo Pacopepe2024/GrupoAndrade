@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence, useIsPresent } from 'framer-motion';
 import { DimensionOverlay } from './DimensionOverlay';
@@ -17,13 +17,20 @@ interface Finish {
   name?: string
 }
 
+export interface FinishesData {
+  lisos?: Finish[];
+  texturados?: Finish[];
+  topalum?: Finish[];
+  estandar?: Finish[];
+}
+
 interface ProductHeroProps {
   title: string
   descripcion: string
   images: string[]
   dimensiones: { label: string; valor: string; x?: string; y?: string; rotacion?: string; ancho?: string }[]
   prestaciones: { label: string; valor: string }[]
-  finishes?: Finish[]
+  finishes?: FinishesData
   linkDescarga?: string
   fabricante?: string
 }
@@ -113,13 +120,28 @@ function resolveVariant(v: object | ((d: Dir) => object), dir: Dir) {
   return typeof v === 'function' ? v(dir) : v;
 }
 
+function formatFinishName(url: string): string {
+  if (!url) return '';
+  const parts = url.split('/');
+  let filename = parts[parts.length - 1];
+  if (!filename) return '';
+  // Remove extension (including .jpg, .webp etc)
+  filename = filename.replace(/\.[^/.]+$/, "");
+  // Remove leading numbers and dashes (e.g. "24-marfil-claro" -> "marfil-claro")
+  filename = filename.replace(/^\d+-?/, "");
+  // Replace hyphens and underscores with spaces
+  filename = filename.replace(/[-_]/g, " ");
+  // Capitalize words
+  return filename.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+}
+
 export function ProductHero({
   title,
   descripcion,
   images,
   dimensiones,
   prestaciones,
-  finishes = [],
+  finishes = {},
   linkDescarga,
   fabricante,
 }: ProductHeroProps) {
@@ -132,6 +154,25 @@ export function ProductHero({
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const thumbsContainerRef = useRef<HTMLDivElement>(null);
+
+  const availableFamilies = useMemo(() => {
+    const families = [];
+    if (finishes.lisos && finishes.lisos.length > 0) families.push({ id: 'lisos', label: 'Lisos' });
+    if (finishes.texturados && finishes.texturados.length > 0) families.push({ id: 'texturados', label: 'Texturados' });
+    if (finishes.topalum && finishes.topalum.length > 0) families.push({ id: 'topalum', label: 'TopAlum' });
+    if (finishes.estandar && finishes.estandar.length > 0) families.push({ id: 'estandar', label: 'Estándar' });
+    return families;
+  }, [finishes]);
+
+  const [activeFamily, setActiveFamily] = useState(availableFamilies[0]?.id || '');
+
+  useEffect(() => {
+    if (availableFamilies.length > 0 && !availableFamilies.find(f => f.id === activeFamily)) {
+      setActiveFamily(availableFamilies[0].id);
+    }
+  }, [availableFamilies, activeFamily]);
+
+  const currentFinishes = (activeFamily ? finishes[activeFamily as keyof FinishesData] : []) || [];
 
   const goTo = (i: number) => {
     setDirection(i >= activeIndex ? 1 : -1);
@@ -160,16 +201,18 @@ export function ProductHero({
       {/* Lightbox acabados */}
       {lightbox && (
         <div
-          className="fixed inset-0 z-[9999] bg-black/80 flex items-center justify-center"
+          className="fixed inset-0 z-[9999] bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4"
           onClick={() => setLightbox(null)}
         >
-          <div className="relative max-w-lg w-full mx-4" onClick={e => e.stopPropagation()}>
-            <img src={lightbox.url} alt={lightbox.name} className="w-full h-auto" />
+          <div className="relative flex flex-col items-center w-full max-w-[400px]" onClick={e => e.stopPropagation()}>
+            <div className="relative w-full aspect-square md:w-[400px] md:h-[400px] rounded-full overflow-hidden border-8 border-white/10 shadow-2xl bg-white">
+              <Image src={lightbox.url} alt={lightbox.name || 'Acabado'} fill className="object-cover" sizes="(max-width: 768px) 100vw, 400px" />
+            </div>
             {lightbox.name && (
-              <p className="text-white text-center text-sm mt-3 font-light">{lightbox.name}</p>
+              <p className="text-white text-center text-xl mt-8 font-medium tracking-wide drop-shadow-md">{lightbox.name}</p>
             )}
-            <button onClick={() => setLightbox(null)} className="absolute -top-10 right-0 text-white text-2xl font-light hover:opacity-70">
-              ✕
+            <button onClick={() => setLightbox(null)} className="absolute -top-12 right-0 md:-right-12 text-white/70 hover:text-white text-4xl font-light transition-colors">
+              &times;
             </button>
           </div>
         </div>
@@ -278,10 +321,31 @@ export function ProductHero({
             />
 
             {/* Revestimientos (Rivestimenti) */}
-            {finishes.length > 0 && (
+            {availableFamilies.length > 0 && (
               <div className="mb-7">
-                <p className="text-[14px] text-neutral-800 mb-3">Revestimientos</p>
-                <div className="relative flex items-center gap-1">
+                <div className="flex flex-col mb-4">
+                  <h3 className="text-[14px] text-neutral-900 font-bold uppercase tracking-wider mb-2">Revestimientos</h3>
+                  {/* Pestañas de Familias */}
+                  {availableFamilies.length > 1 && (
+                    <div className="flex flex-wrap gap-2 mt-1">
+                      {availableFamilies.map(fam => (
+                        <button
+                          key={fam.id}
+                          onClick={() => setActiveFamily(fam.id)}
+                          className={`px-3 py-1.5 text-[11px] font-bold tracking-wide rounded-full transition-colors ${
+                            activeFamily === fam.id 
+                              ? 'bg-neutral-900 text-white' 
+                              : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                          }`}
+                        >
+                          {fam.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                
+                <div className="flex items-center gap-2">
                   <button ref={prevRef} className="shrink-0 w-[52px] h-[52px] flex items-center justify-center bg-[#f4f4f4] hover:bg-neutral-200 text-neutral-600 transition-colors disabled:opacity-30">
                     <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M19 12H5M12 19l-7-7 7-7" />
@@ -301,19 +365,22 @@ export function ProductHero({
                       spaceBetween={4}
                       grabCursor
                     >
-                      {finishes.map((f, i) => (
-                        <SwiperSlide key={i} style={{ width: '52px' }}>
-                          <button
-                            onClick={() => setLightbox({ url: f.fullUrl || f.url, name: f.name || '' })}
-                            className="w-[52px] h-[52px] bg-[#f4f4f4] hover:bg-neutral-200 transition-colors flex items-center justify-center"
-                            title={f.name}
-                          >
-                            <div className="relative w-[38px] h-[38px] rounded-full overflow-hidden">
-                              <Image src={f.url} alt={f.name || `acabado ${i + 1}`} fill className="object-cover" sizes="38px" />
-                            </div>
-                          </button>
-                        </SwiperSlide>
-                      ))}
+                      {currentFinishes.map((f, i) => {
+                        const displayName = f.name || formatFinishName(f.url);
+                        return (
+                          <SwiperSlide key={`${activeFamily}-${i}`} style={{ width: '52px' }}>
+                            <button
+                              onClick={() => setLightbox({ url: f.fullUrl || f.url, name: displayName })}
+                              className="w-[52px] h-[52px] bg-[#f4f4f4] hover:bg-neutral-200 transition-colors flex items-center justify-center"
+                              title={displayName}
+                            >
+                              <div className="relative w-[38px] h-[38px] rounded-full overflow-hidden">
+                                <Image src={f.url} alt={displayName || `acabado ${i + 1}`} fill className="object-cover" sizes="38px" />
+                              </div>
+                            </button>
+                          </SwiperSlide>
+                        );
+                      })}
                     </Swiper>
                   </div>
                   <button ref={nextRef} className="shrink-0 w-[52px] h-[52px] flex items-center justify-center bg-[#f4f4f4] hover:bg-neutral-200 text-neutral-600 transition-colors disabled:opacity-30">

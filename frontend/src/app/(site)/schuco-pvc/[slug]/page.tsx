@@ -174,12 +174,12 @@ export default async function ProductDetailPage({
         images={images}
         dimensiones={dimensiones}
         prestaciones={prestaciones}
-        finishes={[
-          ...((meta.finishes || []).filter((f: any) => f && f.url && typeof f.url === 'string' && f.url.length > 0)),
-          ...(await parseGallery(meta.lisos)).map(url => ({ url })),
-          ...(await parseGallery(meta.texturados)).map(url => ({ url })),
-          ...(await parseGallery(meta.topalum)).map(url => ({ url }))
-        ]}
+        finishes={{
+          lisos: (await parseGallery(meta.lisos)).map(url => ({ url })),
+          texturados: (await parseGallery(meta.texturados)).map(url => ({ url })),
+          topalum: (await parseGallery(meta.topalum)).map(url => ({ url })),
+          estandar: ((meta.finishes || []).filter((f: any) => f && f.url && typeof f.url === 'string' && f.url.length > 0)),
+        }}
         linkDescarga={meta['link-descarga']}
         fabricante={meta['nombre-fabricante']}
       />

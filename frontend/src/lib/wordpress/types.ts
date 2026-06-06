@@ -19,7 +19,9 @@ export interface WPProduct {
   meta?: {
     // JetEngine Fields from skin-export-1.json
     'nombre-fabricante'?: string;
+    marca_nombre?: string;
     'nombre-producto'?: string;
+    beneficios?: string;
     'descripcion--producto'?: string;
     'descripcion-larga-producto'?: string;
     

@@ -1,4 +1,4 @@
-import { getCPTBySlug } from './src/lib/wordpress/api.ts';
+import { getCPTBySlug } from './src/lib/wordpress/api';
 
 async function run() {
   const product = await getCPTBySlug('schuco-pvc', 'symbiotic');
