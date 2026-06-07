@@ -18,6 +18,12 @@ export default function Home() {
           >
             Ver Prototipo de Productos
           </Link>
+          <Link 
+            href="/test-loader"
+            className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-neutral-800 bg-white border border-neutral-200 rounded-xl shadow-sm transition-all hover:-translate-y-1 hover:shadow-md ml-4"
+          >
+            Probar Animación de Carga
+          </Link>
         </div>
       </div>
     </main>

@@ -542,4 +542,7 @@ Ambas disponibles en Google Fonts. Bricolage Grotesque tiene carácter propio si
 2. **El Instrumento y el Maestro:** El copy NUNCA debe limitarse a alabar solo a Schüco. 
    - **Schüco** representa la ingeniería alemana y el diseño.
    - **Grupo Andrade** representa la solvencia, la garantía y el "expertise" artesanal que hace que el sistema funcione.
-3. **Posicionamiento:** Posicionar siempre a Grupo Andrade como el "Premium Partner" o "Especialista Seleccionado" de confianza. El cliente compra la excelencia de Schüco a través de la tranquilidad y seguridad que ofrece Grupo Andrade.
+3. **Posicionamiento:** Posicionar siempre a Grupo Andrade como el "Partner de Schüco" o "Especialista Seleccionado" de confianza. **REGLA CRÍTICA:** NUNCA escribir "Premium Partner". Se debe usar exclusivamente "Partner de Schüco" (sin "Premium"). El cliente compra la excelencia de Schüco a través de la tranquilidad y seguridad que ofrece Grupo Andrade.
+
+## REGLA ESTRICTA: No Inventar Secciones No Solicitadas
+**OBLIGATORIO para el Agente AI:** El Agente tiene estrictamente prohibido inventar, agregar o rellenar secciones de contenido (ej. "Detalle 1", "Detalle 2", "Detalle 3", tarjetas de relleno, etc.) si el usuario no las ha solicitado explícitamente. Cíñete siempre al diseño, estructura y datos reales proporcionados o requeridos por el usuario. No se inventan secciones de relleno bajo ningún concepto.

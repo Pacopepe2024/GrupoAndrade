@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import { getCPT, getCPTBySlug } from '@/lib/wordpress/api';
 import { ProductHero } from '@/components/products/ProductHero';
-import { ProductHighlights } from '@/components/products/ProductHighlights';
-import { FinishesGallery } from '@/components/products/FinishesGallery';
 import { InspirationGallery } from '@/components/products/InspirationGallery';
 import { ProductVideo } from '@/components/products/ProductVideo';
 
@@ -100,7 +98,7 @@ export default async function ProductDetailPage({
       rotacion: meta.cota_hoja_rotacion,
       ancho: meta.cota_hoja_ancho
     },
-    meta.valor_tipos_de_hojas    && { label: 'Tipos de hojas', valor: meta.valor_tipos_de_hojas },
+
     meta.acristalamiento         && { 
       label: 'Espesor vidrio', 
       valor: meta.acristalamiento,
@@ -137,13 +135,6 @@ export default async function ProductDetailPage({
   ].filter(p => p.valor) as { label: string; valor: string }[];
 
   const isValidImageUrl = (url?: string) => Boolean(url) && typeof url === 'string' && (url.startsWith('http') || url.startsWith('/'));
-
-  const highlights = [
-    { title: meta.nombre_slider1, content: meta.contenido_slider_uno, image: isValidImageUrl(meta.imagen_slider_uno) ? meta.imagen_slider_uno : undefined },
-    { title: meta.nombre_slider2, content: meta.contenido_slider_dos, image: isValidImageUrl(meta.imagen_slider_dos) ? meta.imagen_slider_dos : undefined },
-    { title: meta.nombre_slider2_tres, content: meta.contenido_slider_tres, image: isValidImageUrl(meta.imagen_slider_tres) ? meta.imagen_slider_tres : undefined },
-    { title: meta.nombre_slider2_cuatro, content: meta.contenido_slider_cuatro, image: isValidImageUrl(meta.imagen_slider_cuatro) ? meta.imagen_slider_cuatro : undefined },
-  ];
 
   const inspirationImages = [
     meta.inspirate1,
@@ -183,15 +174,6 @@ export default async function ProductDetailPage({
         linkDescarga={meta['link-descarga']}
         fabricante={meta['nombre-fabricante']}
       />
-
-      <ProductHighlights blocks={highlights} />
-
-      <FinishesGallery
-        lisos={await parseGallery(meta.lisos)}
-        texturados={await parseGallery(meta.texturados)}
-        topalum={await parseGallery(meta.topalum)}
-      />
-
 
       <InspirationGallery images={inspirationImages} />
 

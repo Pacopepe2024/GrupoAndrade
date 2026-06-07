@@ -67,9 +67,10 @@ export function DimensionOverlay({ activeDimension, valor, cmsX, cmsY, cmsRotaci
       <motion.div 
         key={key}
         className="absolute inset-0 z-50 pointer-events-none"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
       >
         <svg className="w-full h-full" style={{ overflow: 'visible' }}>
           <g style={{ transformOrigin: `${startX} ${startY}`, transform: rotation }}>
@@ -81,9 +82,6 @@ export function DimensionOverlay({ activeDimension, valor, cmsX, cmsY, cmsRotaci
               y2={endY}
               stroke="#0A0A0A"
               strokeWidth="2"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 1, ease: "easeInOut" }}
             />
             
             {/* Remate inicio (tick) */}
@@ -94,9 +92,6 @@ export function DimensionOverlay({ activeDimension, valor, cmsX, cmsY, cmsRotaci
               y2={`calc(${startY} + 10px)`}
               stroke="#0A0A0A"
               strokeWidth="2"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1, duration: 0.3 }}
             />
 
             {/* Remate fin (tick) */}
@@ -107,27 +102,21 @@ export function DimensionOverlay({ activeDimension, valor, cmsX, cmsY, cmsRotaci
               y2={`calc(${endY} + 10px)`}
               stroke="#0A0A0A"
               strokeWidth="2"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1, duration: 0.3 }}
             />
           </g>
         </svg>
 
         {/* Etiqueta de texto (valor) centrada exactamente en la línea */}
-        <motion.div
+        <div
           className="absolute bg-white/95 backdrop-blur-md px-3.5 py-1.5 text-[11px] font-bold shadow-[0_4px_20px_rgba(0,0,0,0.15)] border border-neutral-100 rounded-full text-neutral-900 tracking-wide"
           style={{ 
             left: `${finalMidX}%`, 
             top: `${finalMidY}%`,
             transform: 'translate(-50%, -50%)'
           }}
-          initial={{ opacity: 0, scale: 0.8, y: 10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
         >
           {valor || activeDimension}
-        </motion.div>
+        </div>
       </motion.div>
     </AnimatePresence>
   );

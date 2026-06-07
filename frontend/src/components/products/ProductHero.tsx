@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence, useIsPresent } from 'framer-motion';
 import { DimensionOverlay } from './DimensionOverlay';
 import { Modal } from '@/components/ui/Modal';
+import { SmartLink } from '@/components/ui/SmartLink';
 import { RequestInfoForm } from '@/components/forms/RequestInfoForm';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
@@ -150,6 +151,7 @@ export function ProductHero({
   const [lightbox, setLightbox] = useState<{ url: string; name: string } | null>(null);
   const [prestOpen, setPrestOpen] = useState(false);
   const [activeDimension, setActiveDimension] = useState<{ label: string; valor: string; x?: string; y?: string; rotacion?: string; ancho?: string } | null>(null);
+  const [isPrestacionesModalOpen, setIsPrestacionesModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
@@ -194,6 +196,23 @@ export function ProductHero({
     }
   }, [activeIndex]);
 
+  // Automatización de Dimensiones (Efecto Vídeo secuencial a 2 segundos)
+  useEffect(() => {
+    if (activeIndex === 0 && dimensiones && dimensiones.length > 0) {
+      let currentIndex = 0;
+      setActiveDimension(dimensiones[0]);
+      
+      const intervalId = setInterval(() => {
+        currentIndex = (currentIndex + 1) % dimensiones.length;
+        setActiveDimension(dimensiones[currentIndex]);
+      }, 3500);
+      
+      return () => clearInterval(intervalId);
+    } else {
+      setActiveDimension(null);
+    }
+  }, [activeIndex, dimensiones]);
+
   const t = TRANSITIONS[activeIndex % TRANSITIONS.length];
 
   return (
@@ -229,7 +248,7 @@ export function ProductHero({
         </div>
 
         {/* Col A — Miniaturas */}
-        <div className="order-2 lg:order-1 w-full lg:w-[100px] shrink-0">
+        <div className="order-2 lg:order-1 w-full lg:w-[100px] shrink-0 lg:sticky lg:top-[120px] lg:z-10">
           <div
             ref={thumbsContainerRef}
             className="flex flex-row lg:flex-col gap-3 overflow-x-auto lg:overflow-y-auto w-full lg:h-[min(800px,55vw)] hide-scrollbar pb-2 lg:pb-0"
@@ -249,7 +268,7 @@ export function ProductHero({
         </div>
 
         {/* Col B — Imagen principal con transiciones cinematográficas */}
-        <div className="order-1 lg:order-2 w-full lg:flex-1 lg:max-w-[800px] aspect-square shrink-0 bg-[#F4F4F4] overflow-hidden relative">
+        <div className="order-1 lg:order-2 w-full lg:flex-1 lg:max-w-[800px] aspect-square shrink-0 bg-[#F4F4F4] overflow-hidden relative lg:sticky lg:top-[120px] lg:z-10">
 
           <AnimatePresence mode="sync">
             <GallerySlide
@@ -392,53 +411,20 @@ export function ProductHero({
               </div>
             )}
 
-            {/* Dimensiones */}
-            {dimensiones.length > 0 && (
-              <div className="mb-7">
-                <p className="text-[11px] font-bold uppercase tracking-widest text-neutral-400 mb-2.5">
-                  Dimensiones <span className="text-[9px] lowercase font-normal opacity-70">(Clic para ver en sección)</span>
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {dimensiones.map((d, i) => (
-                    <button
-                      key={i}
-                      onClick={() => { goTo(0); setActiveDimension(d); }}
-                      className={`border px-3 py-1.5 text-[12px] transition-all text-left group ${
-                        activeDimension?.label === d.label
-                          ? 'border-primary bg-primary/10 text-primary'
-                          : 'border-neutral-200 text-neutral-600 hover:border-primary/50 hover:bg-neutral-50'
-                      }`}
-                    >
-                      <span className={`transition-colors ${activeDimension?.label === d.label ? 'text-primary/70' : 'text-neutral-400 group-hover:text-primary/50'}`}>{d.label}:&nbsp;</span>
-                      <span className={`font-semibold ${activeDimension?.label === d.label ? 'text-primary' : 'text-neutral-800'}`}>{d.valor}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
+
 
             {/* Prestaciones */}
             {prestaciones.length > 0 && (
               <div className="mb-7">
                 <button
-                  onClick={() => setPrestOpen(o => !o)}
-                  className="w-full flex items-center justify-between py-2.5 border-y border-neutral-200 group"
+                  onClick={() => setIsPrestacionesModalOpen(true)}
+                  className="w-full flex items-center justify-between py-2.5 border-y border-neutral-200 group hover:border-primary transition-colors"
                 >
-                  <p className="text-[11px] font-bold uppercase tracking-widest text-neutral-400">Prestaciones técnicas</p>
-                  <svg className={`w-4 h-4 text-neutral-400 transition-transform duration-200 ${prestOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-neutral-400 group-hover:text-primary transition-colors">Prestaciones técnicas</p>
+                  <svg className="w-4 h-4 text-neutral-400 group-hover:text-primary transition-colors" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                   </svg>
                 </button>
-                {prestOpen && (
-                  <div className="divide-y divide-neutral-100 border-b border-neutral-200">
-                    {prestaciones.map((p, i) => (
-                      <div key={i} className="flex justify-between items-center px-1 py-2.5">
-                        <span className="text-[12px] text-neutral-500">{p.label}</span>
-                        <span className="text-[12px] font-bold text-neutral-900">{p.valor}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
               </div>
             )}
 
@@ -453,17 +439,15 @@ export function ProductHero({
                 Solicitar información
               </button>
               {linkDescarga && (
-                <a
+                <SmartLink
                   href={linkDescarga}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="w-full border border-neutral-300 text-neutral-600 text-[12px] font-bold uppercase tracking-widest py-3 flex items-center justify-center gap-2 hover:border-neutral-900 hover:text-neutral-900 transition-colors"
                 >
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                   </svg>
                   Ficha técnica
-                </a>
+                </SmartLink>
               )}
             </div>
           </div>
@@ -477,6 +461,22 @@ export function ProductHero({
         title="Solicitar información"
       >
         <RequestInfoForm productName={title} />
+      </Modal>
+
+      {/* Modal de Prestaciones Técnicas */}
+      <Modal 
+        isOpen={isPrestacionesModalOpen} 
+        onClose={() => setIsPrestacionesModalOpen(false)}
+        title="Prestaciones Técnicas"
+      >
+        <div className="flex flex-col gap-1 px-4 pb-6">
+          {prestaciones.map((p, i) => (
+            <div key={i} className="flex flex-col sm:flex-row justify-between sm:items-center py-4 border-b border-neutral-100 last:border-0 gap-2">
+              <span className="text-sm text-neutral-500">{p.label}</span>
+              <span className="text-base font-bold text-neutral-900 sm:text-right">{p.valor}</span>
+            </div>
+          ))}
+        </div>
       </Modal>
     </>
   );

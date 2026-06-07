@@ -79,20 +79,25 @@ export function Header() {
             
             {/* Column 1 */}
             <div>
-              <h4 className="text-xl font-bold mb-6">Sistemas para ventanas en PVC</h4>
+              <h4 className="text-xl font-bold mb-6">Sistemas abatibles en PVC</h4>
               <ul className="space-y-4">
-                <li><Link href="/schuco-pvc/focusing" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Schüco FocusIng</Link></li>
-                <li><Link href="/schuco-pvc/living" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Schüco LivIng</Link></li>
-                <li><Link href="/schuco-pvc/symbiotic" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Schüco Symbiotic</Link></li>
+                <li><Link onClick={() => setTimeout(() => setIsMegaMenuOpen(false), 0)} href="/schuco-pvc/corona-70" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Schüco Corona 70</Link></li>
+                <li><Link onClick={() => setTimeout(() => setIsMegaMenuOpen(false), 0)} href="/schuco-pvc/focusing" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Schüco FocusIng</Link></li>
+                <li><Link onClick={() => setTimeout(() => setIsMegaMenuOpen(false), 0)} href="/schuco-pvc/living" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Schüco LivIng</Link></li>
+                <li><Link onClick={() => setTimeout(() => setIsMegaMenuOpen(false), 0)} href="/schuco-pvc/living-alu-inside" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Schüco Alu Inside</Link></li>
+                <li><Link onClick={() => setTimeout(() => setIsMegaMenuOpen(false), 0)} href="/schuco-pvc/symbiotic" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Schüco Symbiotic</Link></li>
               </ul>
             </div>
 
             {/* Column 2 */}
             <div>
-              <h4 className="text-xl font-bold mb-6">Sistemas para correderas en PVC</h4>
+              <h4 className="text-xl font-bold mb-6">Sistemas correderas en PVC</h4>
               <ul className="space-y-4">
-                <li><Link href="/schuco-pvc/livingslide" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Schüco LivIngSlide</Link></li>
-                <li><Link href="/schuco-pvc/softslide" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Schüco SoftSlide</Link></li>
+                <li><Link onClick={() => setTimeout(() => setIsMegaMenuOpen(false), 0)} href="/schuco-pvc/livingslide" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Schüco LivIngSlide</Link></li>
+                <li><Link onClick={() => setTimeout(() => setIsMegaMenuOpen(false), 0)} href="/schuco-pvc/softslide" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Schüco SoftSlide</Link></li>
+                <li><Link onClick={() => setTimeout(() => setIsMegaMenuOpen(false), 0)} href="/schuco-pvc/softline-panoramica" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Schüco SoftLine Panoramica</Link></li>
+                <li><Link onClick={() => setTimeout(() => setIsMegaMenuOpen(false), 0)} href="/schuco-pvc/focusing-elevable" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Schüco FocusIng Elevable</Link></li>
+                <li><Link onClick={() => setTimeout(() => setIsMegaMenuOpen(false), 0)} href="/schuco-pvc/puerta-plegable-living" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Puerta plegable Schüco LivIng</Link></li>
               </ul>
             </div>
 
@@ -100,8 +105,8 @@ export function Header() {
             <div>
               <h4 className="text-xl font-bold mb-6">Sistemas de cierre y ventilación</h4>
               <ul className="space-y-4">
-                <li><Link href="/schuco-pvc/variotec-advanced" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">VarioTec Advanced</Link></li>
-                <li><Link href="/schuco-pvc/domotica" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Domótica y soluciones smart</Link></li>
+                <li><Link onClick={() => setTimeout(() => setIsMegaMenuOpen(false), 0)} href="/schuco-pvc/variotec-advanced" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">VarioTec Advanced</Link></li>
+                <li><Link onClick={() => setTimeout(() => setIsMegaMenuOpen(false), 0)} href="/schuco-pvc/domotica" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Domótica y soluciones smart</Link></li>
               </ul>
             </div>
 
@@ -109,8 +114,8 @@ export function Header() {
             <div>
               <h4 className="text-xl font-bold mb-6">Diseñado para Schüco</h4>
               <ul className="space-y-4">
-                <li><Link href="/schuco-pvc/tabiques-interiores" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Tabiques interiores</Link></li>
-                <li><Link href="/schuco-pvc/pergolas-bioclimaticas" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Pérgolas Bioclimáticas</Link></li>
+                <li><Link onClick={() => setTimeout(() => setIsMegaMenuOpen(false), 0)} href="/schuco-pvc/tabiques-interiores" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Tabiques interiores</Link></li>
+                <li><Link onClick={() => setTimeout(() => setIsMegaMenuOpen(false), 0)} href="/schuco-pvc/pergolas-bioclimaticas" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Pérgolas Bioclimáticas</Link></li>
               </ul>
             </div>
 
@@ -143,11 +148,16 @@ export function Header() {
             {/* Mobile Products Menu (Aplanado para móvil) */}
             <div className="flex flex-col gap-4 pb-6">
               <h3 className="text-sm font-bold uppercase tracking-widest text-neutral-400 mb-2">Productos PVC</h3>
+              <Link onClick={() => setIsMobileMenuOpen(false)} href="/schuco-pvc/corona-70" className="text-lg font-bold text-neutral-800 hover:text-primary">Schüco Corona 70</Link>
               <Link onClick={() => setIsMobileMenuOpen(false)} href="/schuco-pvc/focusing" className="text-lg font-bold text-neutral-800 hover:text-primary">Schüco FocusIng</Link>
               <Link onClick={() => setIsMobileMenuOpen(false)} href="/schuco-pvc/living" className="text-lg font-bold text-neutral-800 hover:text-primary">Schüco LivIng</Link>
+              <Link onClick={() => setIsMobileMenuOpen(false)} href="/schuco-pvc/living-alu-inside" className="text-lg font-bold text-neutral-800 hover:text-primary">Schüco Alu Inside</Link>
               <Link onClick={() => setIsMobileMenuOpen(false)} href="/schuco-pvc/symbiotic" className="text-lg font-bold text-neutral-800 hover:text-primary">Schüco Symbiotic</Link>
               <Link onClick={() => setIsMobileMenuOpen(false)} href="/schuco-pvc/livingslide" className="text-lg font-bold text-neutral-800 hover:text-primary">Schüco LivIngSlide</Link>
               <Link onClick={() => setIsMobileMenuOpen(false)} href="/schuco-pvc/softslide" className="text-lg font-bold text-neutral-800 hover:text-primary">Schüco SoftSlide</Link>
+              <Link onClick={() => setIsMobileMenuOpen(false)} href="/schuco-pvc/softline-panoramica" className="text-lg font-bold text-neutral-800 hover:text-primary">Schüco SoftLine Panoramica</Link>
+              <Link onClick={() => setIsMobileMenuOpen(false)} href="/schuco-pvc/focusing-elevable" className="text-lg font-bold text-neutral-800 hover:text-primary">Schüco FocusIng Elevable</Link>
+              <Link onClick={() => setIsMobileMenuOpen(false)} href="/schuco-pvc/puerta-plegable-living" className="text-lg font-bold text-neutral-800 hover:text-primary">Puerta plegable Schüco LivIng</Link>
             </div>
 
             {/* Mobile Top Bar Links (Empresa, contacto...) */}
