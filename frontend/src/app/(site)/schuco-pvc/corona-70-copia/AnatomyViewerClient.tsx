@@ -84,8 +84,8 @@ export function AnatomyViewerClient({
     }
   };
 
-  const currentHotspot = mode === 'technical' ? (hotspots[localIndex] || hotspots[0] || {}) : (mode === 'lifestyle' ? (lifestyleHotspots[localIndex] || lifestyleHotspots[0] || {}) : {});
-  const currentBlock = mode === 'technical' ? (blocks[localIndex] || blocks[0] || {}) : (mode === 'lifestyle' ? (lifestyleBlocks[localIndex] || lifestyleBlocks[0] || {}) : {});
+  const currentHotspot = mode === 'technical' ? (hotspots[localIndex] || hotspots[0] || {}) : (mode === 'lifestyle' ? (lifestyleHotspots?.[localIndex] || lifestyleHotspots?.[0] || {}) : {});
+  const currentBlock = mode === 'technical' ? (blocks[localIndex] || blocks[0] || {}) : (mode === 'lifestyle' ? (lifestyleBlocks?.[localIndex] || lifestyleBlocks?.[0] || {}) : {});
 
   return (
     <div className="w-full h-[100dvh] bg-white flex items-center justify-center p-0 md:p-8 relative">
@@ -300,7 +300,7 @@ export function AnatomyViewerClient({
                       )}
 
                       {/* Hotspot Markers */}
-                      {(mode === 'technical' ? hotspots : (mode === 'lifestyle' ? lifestyleHotspots : [])).map((h: any, i: number) => (
+                      {(mode === 'technical' ? hotspots : (mode === 'lifestyle' ? (lifestyleHotspots || []) : [])).map((h: any, i: number) => (
                         <div 
                           key={h.id || i}
                           className={`absolute w-8 h-8 -ml-4 -mt-4 rounded-full flex items-center justify-center cursor-pointer transition-all duration-500 z-20 ${i === localIndex && !isCTAActive ? 'scale-100 opacity-100' : 'scale-75 opacity-50 hover:opacity-80'}`}

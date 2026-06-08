@@ -117,8 +117,8 @@ export function AnatomyModal({
     }
   };
 
-  const currentHotspot = mode === 'technical' ? (hotspots[localIndex] || hotspots[0] || { x: 50, y: 50, spotlightSize: 200 }) : (mode === 'lifestyle' ? (lifestyleHotspots[localIndex] || lifestyleHotspots[0] || { x: 50, y: 50, spotlightSize: 200 }) : { x: 50, y: 50, spotlightSize: 200 });
-  const currentBlock = mode === 'technical' ? (blocks[localIndex] || blocks[0] || { title: '', text: '', kpis: [] }) : (mode === 'lifestyle' ? (lifestyleBlocks[localIndex] || lifestyleBlocks[0] || { title: '', text: '', kpis: [] }) : { title: '', text: '', kpis: [] });
+  const currentHotspot = mode === 'technical' ? (hotspots[localIndex] || hotspots[0] || { x: 50, y: 50, spotlightSize: 200 }) : (mode === 'lifestyle' ? (lifestyleHotspots?.[localIndex] || lifestyleHotspots?.[0] || { x: 50, y: 50, spotlightSize: 200 }) : { x: 50, y: 50, spotlightSize: 200 });
+  const currentBlock = mode === 'technical' ? (blocks[localIndex] || blocks[0] || { title: '', text: '', kpis: [] }) : (mode === 'lifestyle' ? (lifestyleBlocks?.[localIndex] || lifestyleBlocks?.[0] || { title: '', text: '', kpis: [] }) : { title: '', text: '', kpis: [] });
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-md">
@@ -262,7 +262,7 @@ export function AnatomyModal({
                       )}
 
                       {/* Hotspot Markers */}
-                      {(mode === 'technical' ? hotspots : (mode === 'lifestyle' ? lifestyleHotspots : [])).map((h: any, i: number) => (
+                      {(mode === 'technical' ? hotspots : (mode === 'lifestyle' ? (lifestyleHotspots || []) : [])).map((h: any, i: number) => (
                         <div 
                           key={h.id || i}
                           className={`absolute w-8 h-8 -ml-4 -mt-4 rounded-full flex items-center justify-center cursor-pointer transition-all duration-500 z-20 ${i === localIndex && !isCTAActive ? 'scale-100 opacity-100' : 'scale-75 opacity-50 hover:opacity-80'}`}
