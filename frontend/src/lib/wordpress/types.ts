@@ -17,6 +17,7 @@ export interface WPProduct {
   };
   seo_meta?: WPSeoMeta;
   meta?: {
+    [key: string]: any;
     // JetEngine Fields from skin-export-1.json
     'nombre-fabricante'?: string;
     marca_nombre?: string;

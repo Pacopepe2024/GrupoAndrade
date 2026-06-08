@@ -11,6 +11,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { AnatomyModal } from '@/components/products/AnatomyModal';
 
 interface Finish {
   url: string
@@ -34,6 +35,12 @@ interface ProductHeroProps {
   finishes?: FinishesData
   linkDescarga?: string
   fabricante?: string
+  anatomyHotspots?: any[]
+  anatomyBlocks?: any[]
+  anatomyBaseImage?: string
+  lifestyleImage?: string
+  lifestyleHotspots?: any[]
+  lifestyleBlocks?: any[]
 }
 
 // 10 transiciones cinematográficas — una por imagen, sin desenfoque
@@ -145,6 +152,15 @@ export function ProductHero({
   finishes = {},
   linkDescarga,
   fabricante,
+  anatomyHotspots,
+  anatomyBlocks,
+  anatomyBaseImage,
+  lifestyleImage,
+  lifestyleHotspots,
+  lifestyleBlocks,
+  ctaPhrase,
+  ctaButtonText,
+  ctaLink
 }: ProductHeroProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(1);
@@ -153,6 +169,7 @@ export function ProductHero({
   const [activeDimension, setActiveDimension] = useState<{ label: string; valor: string; x?: string; y?: string; rotacion?: string; ancho?: string } | null>(null);
   const [isPrestacionesModalOpen, setIsPrestacionesModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAnatomyOpen, setIsAnatomyOpen] = useState(false);
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const thumbsContainerRef = useRef<HTMLDivElement>(null);
@@ -213,6 +230,13 @@ export function ProductHero({
     }
   }, [activeIndex, dimensiones]);
 
+  // Trigger Anatomy Modal on second image
+  useEffect(() => {
+    if (activeIndex === 1 && anatomyBlocks && anatomyBlocks.length > 0) {
+      setIsAnatomyOpen(true);
+    }
+  }, [activeIndex, anatomyBlocks]);
+
   const t = TRANSITIONS[activeIndex % TRANSITIONS.length];
 
   return (
@@ -268,7 +292,14 @@ export function ProductHero({
         </div>
 
         {/* Col B — Imagen principal con transiciones cinematográficas */}
-        <div className="order-1 lg:order-2 w-full lg:flex-1 lg:max-w-[800px] aspect-square shrink-0 bg-[#F4F4F4] overflow-hidden relative lg:sticky lg:top-[120px] lg:z-10">
+        <div 
+          className={`order-1 lg:order-2 w-full lg:flex-1 lg:max-w-[800px] aspect-square shrink-0 bg-[#F4F4F4] overflow-hidden relative lg:sticky lg:top-[120px] lg:z-10 ${activeIndex === 1 && anatomyBlocks && anatomyBlocks.length > 0 ? 'cursor-pointer' : ''}`}
+          onClick={() => {
+            if (activeIndex === 1 && anatomyBlocks && anatomyBlocks.length > 0) {
+              setIsAnatomyOpen(true);
+            }
+          }}
+        >
 
           <AnimatePresence mode="sync">
             <GallerySlide
@@ -478,6 +509,22 @@ export function ProductHero({
           ))}
         </div>
       </Modal>
+
+      {/* Modal Anatomía 3D */}
+      <AnatomyModal
+        isOpen={isAnatomyOpen}
+        onClose={() => setIsAnatomyOpen(false)}
+        hotspots={anatomyHotspots || []}
+        blocks={anatomyBlocks || []}
+        baseImage={anatomyBaseImage || '/placeholder.jpg'}
+        lifestyleImage={lifestyleImage}
+        lifestyleHotspots={lifestyleHotspots}
+        lifestyleBlocks={lifestyleBlocks}
+        ctaPhrase={ctaPhrase}
+        ctaButtonText={ctaButtonText}
+        ctaLink={ctaLink}
+        onRequestInfo={() => setIsModalOpen(true)}
+      />
     </>
   );
 }

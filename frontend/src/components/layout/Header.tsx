@@ -82,6 +82,7 @@ export function Header() {
               <h4 className="text-xl font-bold mb-6">Sistemas abatibles en PVC</h4>
               <ul className="space-y-4">
                 <li><Link onClick={() => setTimeout(() => setIsMegaMenuOpen(false), 0)} href="/schuco-pvc/corona-70" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Schüco Corona 70</Link></li>
+                <li><Link onClick={() => setTimeout(() => setIsMegaMenuOpen(false), 0)} href="/schuco-pvc/corona-70-copia" className="text-[#78B928] font-bold hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Copia Schüco Corona 70</Link></li>
                 <li><Link onClick={() => setTimeout(() => setIsMegaMenuOpen(false), 0)} href="/schuco-pvc/focusing" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Schüco FocusIng</Link></li>
                 <li><Link onClick={() => setTimeout(() => setIsMegaMenuOpen(false), 0)} href="/schuco-pvc/living" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Schüco LivIng</Link></li>
                 <li><Link onClick={() => setTimeout(() => setIsMegaMenuOpen(false), 0)} href="/schuco-pvc/living-alu-inside" className="text-neutral-600 hover:text-primary transition-colors block border-b border-neutral-100 pb-2">Schüco Alu Inside</Link></li>
@@ -149,6 +150,7 @@ export function Header() {
             <div className="flex flex-col gap-4 pb-6">
               <h3 className="text-sm font-bold uppercase tracking-widest text-neutral-400 mb-2">Productos PVC</h3>
               <Link onClick={() => setIsMobileMenuOpen(false)} href="/schuco-pvc/corona-70" className="text-lg font-bold text-neutral-800 hover:text-primary">Schüco Corona 70</Link>
+              <Link onClick={() => setIsMobileMenuOpen(false)} href="/schuco-pvc/corona-70-copia" className="text-lg font-bold text-[#78B928] hover:text-primary">Copia Schüco Corona 70</Link>
               <Link onClick={() => setIsMobileMenuOpen(false)} href="/schuco-pvc/focusing" className="text-lg font-bold text-neutral-800 hover:text-primary">Schüco FocusIng</Link>
               <Link onClick={() => setIsMobileMenuOpen(false)} href="/schuco-pvc/living" className="text-lg font-bold text-neutral-800 hover:text-primary">Schüco LivIng</Link>
               <Link onClick={() => setIsMobileMenuOpen(false)} href="/schuco-pvc/living-alu-inside" className="text-lg font-bold text-neutral-800 hover:text-primary">Schüco Alu Inside</Link>

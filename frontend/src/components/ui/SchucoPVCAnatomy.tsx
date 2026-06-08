@@ -5,65 +5,29 @@ import Image from 'next/image';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import styles from './SchucoPVCAnatomy.module.css';
 
-// === CONFIGURACIÓN DE PUNTOS CALIENTES (HOTSPOTS) ===
-// Aquí puedes editar fácilmente las posiciones X/Y y el tamaño del spotlight
-const HOTSPOTS = [
-  { id: 0, x: 54, y: 18, spotlightSize: 246 },
-  { id: 1, x: 58, y: 38, spotlightSize: 214 },
-  { id: 2, x: 48, y: 58, spotlightSize: 294 },
-  { id: 3, x: 38, y: 71, spotlightSize: 248 },
-  { id: 4, x: 65, y: 64, spotlightSize: 228 },
-];
+export interface AnatomyHotspot {
+  id: number;
+  x: number;
+  y: number;
+  spotlightSize?: number;
+}
 
-const BLOCKS = [
-  {
-    title: 'Acristalamiento eficiente',
-    text: 'El vidrio se presenta como una pieza de precisión: menos pérdida energética, más confort interior y una lectura visual mucho más limpia.',
-    kpis: [
-      { label: 'Confort', value: 'Temperatura más estable' },
-      { label: 'Luz', value: 'Lectura visual limpia' },
-      { label: 'Silencio', value: 'Mejor sensación interior' },
-    ]
-  },
-  {
-    title: 'Juntas de estanqueidad',
-    text: 'El foco se desplaza a las juntas para explicar el sellado perimetral sin romper la imagen ni crear una animación agresiva.',
-    kpis: [
-      { label: 'Aire', value: 'Menos filtraciones' },
-      { label: 'Agua', value: 'Protección perimetral' },
-      { label: 'Ruido', value: 'Cierre más compacto' },
-    ]
-  },
-  {
-    title: 'Perfil multicámara',
-    text: 'Las cámaras interiores se iluminan de forma selectiva para mostrar la ingeniería oculta del perfil de PVC y su función aislante.',
-    kpis: [
-      { label: 'Multi', value: 'Cavidades interiores' },
-      { label: 'Térmico', value: 'Barrera de aislamiento' },
-      { label: 'Diseño', value: 'Estructura optimizada' },
-    ]
-  },
-  {
-    title: 'Refuerzo estructural',
-    text: 'Una transición suave resalta la zona estructural y transmite solidez, estabilidad y producto de alto rendimiento.',
-    kpis: [
-      { label: 'Firmeza', value: 'Mayor estabilidad' },
-      { label: 'Vida útil', value: 'Bajo mantenimiento' },
-      { label: 'Marco', value: 'Geometría resistente' },
-    ]
-  },
-  {
-    title: 'Drenaje oculto',
-    text: 'El detalle técnico se explica con un foco preciso y una estética limpia, sin recargar la composición ni distraer del producto.',
-    kpis: [
-      { label: 'Agua', value: 'Evacuación integrada' },
-      { label: 'Estética', value: 'Sin elementos visibles' },
-      { label: 'Sistema', value: 'Funcionamiento conjunto' },
-    ]
-  }
-];
+export interface AnatomyBlock {
+  title: string;
+  text: string;
+  kpis: { label: string; value: string }[];
+}
 
-export function SchucoPVCAnatomy() {
+export interface SchucoPVCAnatomyProps {
+  hotspots: AnatomyHotspot[];
+  blocks: AnatomyBlock[];
+  baseImage: string;
+  lifestyleImage?: string;
+  lifestyleHotspots?: AnatomyHotspot[];
+  lifestyleBlocks?: AnatomyBlock[];
+}
+
+export function SchucoPVCAnatomy({ hotspots = [], blocks = [], baseImage = '/placeholder.jpg' }: SchucoPVCAnatomyProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
@@ -108,8 +72,8 @@ export function SchucoPVCAnatomy() {
     setMousePos({ x: 0, y: 0 });
   };
 
-  const currentHotspot = HOTSPOTS[activeIndex] || HOTSPOTS[0];
-  const currentBlock = BLOCKS[activeIndex] || BLOCKS[0];
+  const currentHotspot = hotspots[activeIndex] || hotspots[0] || { x: 50, y: 50, spotlightSize: 200 };
+  const currentBlock = blocks[activeIndex] || blocks[0] || { title: '', text: '', kpis: [] };
 
   return (
     <section className={styles.container} ref={containerRef}>
@@ -122,7 +86,7 @@ export function SchucoPVCAnatomy() {
 
       {/* Side Navigation */}
       <nav className={styles.sideNav} aria-label="Navegación de características">
-        {HOTSPOTS.map((_, i) => (
+        {hotspots.map((_, i) => (
           <button
             key={i}
             className={`${styles.navDot} ${i === activeIndex ? styles.active : ''}`}
@@ -166,7 +130,7 @@ export function SchucoPVCAnatomy() {
             >
               {/* Base Image (Darkened) */}
               <Image 
-                src="/images/perfil-pvc.webp" 
+                src={baseImage}
                 alt="Perfil PVC Schüco" 
                 fill 
                 className={styles.productImage} 
@@ -178,14 +142,14 @@ export function SchucoPVCAnatomy() {
               <motion.div
                 className={styles.spotlightMask}
                 animate={{
-                  WebkitMaskImage: `radial-gradient(${currentHotspot.spotlightSize}px circle at ${currentHotspot.x}% ${currentHotspot.y}%, black 40%, transparent 100%)`,
-                  maskImage: `radial-gradient(${currentHotspot.spotlightSize}px circle at ${currentHotspot.x}% ${currentHotspot.y}%, black 40%, transparent 100%)`,
+                  WebkitMaskImage: `radial-gradient(${currentHotspot.spotlightSize || 200}px circle at ${currentHotspot.x}% ${currentHotspot.y}%, black 40%, transparent 100%)`,
+                  maskImage: `radial-gradient(${currentHotspot.spotlightSize || 200}px circle at ${currentHotspot.x}% ${currentHotspot.y}%, black 40%, transparent 100%)`,
                   backgroundColor: 'rgba(0,0,0,0)'
                 } as any}
                 transition={{ type: 'tween', duration: 0.8, ease: "easeInOut" }}
               >
                 <Image 
-                  src="/images/perfil-pvc.webp" 
+                  src={baseImage}
                   alt="Highlight" 
                   fill 
                   className={styles.productImage} 
@@ -193,7 +157,7 @@ export function SchucoPVCAnatomy() {
               </motion.div>
 
               {/* Hotspot Markers */}
-              {HOTSPOTS.map((h, i) => (
+              {hotspots.map((h, i) => (
                 <div 
                   key={h.id}
                   className={`${styles.hotspot} ${i === activeIndex ? styles.active : ''}`}
@@ -225,7 +189,7 @@ export function SchucoPVCAnatomy() {
 
         {/* Right Col: Scrolling Text Blocks */}
         <div className={styles.textCol}>
-          {BLOCKS.map((block, i) => (
+          {blocks.map((block, i) => (
             <div 
               key={i} 
               id={`block-${i}`}
