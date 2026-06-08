@@ -52,8 +52,8 @@ export function AnatomyModal({
   const containerRef = useRef<HTMLDivElement>(null);
   const isScrolling = useRef(false);
 
-  const hasLifestyle = Boolean(lifestyleImage && lifestyleHotspots?.length > 0);
-  const totalPoints = hotspots.length + (hasLifestyle ? lifestyleHotspots.length : 0) + 1; // +1 para CTA
+  const hasLifestyle = Boolean(lifestyleImage && lifestyleHotspots && lifestyleHotspots.length > 0);
+  const totalPoints = hotspots.length + (hasLifestyle ? lifestyleHotspots!.length : 0) + 1; // +1 para CTA
   const isCTAActive = activeIndex === totalPoints - 1;
   const isLifestyleActive = hasLifestyle && activeIndex >= hotspots.length && !isCTAActive;
   const mode = isCTAActive ? 'cta' : (isLifestyleActive ? 'lifestyle' : 'technical');

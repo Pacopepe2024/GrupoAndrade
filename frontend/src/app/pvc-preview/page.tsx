@@ -9,7 +9,11 @@ export const metadata: Metadata = {
 export default function PvcPreviewPage() {
   return (
     <main className="bg-[#050605] min-h-screen text-white">
-      <SchucoPVCAnatomy />
+      <SchucoPVCAnatomy 
+        hotspots={[]}
+        blocks={[]}
+        baseImage=""
+      />
     </main>
   );
 }

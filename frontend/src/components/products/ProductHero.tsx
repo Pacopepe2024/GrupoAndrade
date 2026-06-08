@@ -41,6 +41,9 @@ interface ProductHeroProps {
   lifestyleImage?: string
   lifestyleHotspots?: any[]
   lifestyleBlocks?: any[]
+  ctaPhrase?: string
+  ctaButtonText?: string
+  ctaLink?: string
 }
 
 // 10 transiciones cinematográficas — una por imagen, sin desenfoque
